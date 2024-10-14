@@ -1,6 +1,0 @@
-Usuário: mateus ferreira silva
-Livros emprestados:
-- O Senhor dos Anéis - J.R.R. Tolkien
-- 1984 - George Orwell
-- Dom Casmurro - Machado de Assis
-

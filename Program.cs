@@ -221,35 +221,46 @@ class Program
     }
 
     static void ExibirCatalogo(List<Livro> catalogoLivros)
+{
+    Console.Clear();
+    ExibirCabecalho("Catálogo de Livros");
+    foreach (var livro in catalogoLivros)
     {
-        Console.Clear();
-        ExibirCabecalho("Catálogo de Livros");
-        foreach (var livro in catalogoLivros)
+        if (livro.Quantidade <= 0)
         {
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("\nNome: ");
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine(livro.Titulo);
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("Autor: ");
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine(livro.Autor);
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("Gênero: ");
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine(livro.Genero);
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("Quantidade: ");
-        Console.ForegroundColor = ConsoleColor.DarkGreen; 
-        Console.WriteLine(livro.Quantidade);
-        Console.ResetColor();
-
-
+            Console.ForegroundColor = ConsoleColor.DarkGray;
         }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        Console.Write("\nNome: ");
+        Console.ForegroundColor = livro.Quantidade <= 0 ? ConsoleColor.DarkGray : ConsoleColor.Yellow;
+        Console.WriteLine(livro.Titulo);
+
+        Console.ForegroundColor = livro.Quantidade <= 0 ? ConsoleColor.DarkGray : ConsoleColor.White;
+        Console.Write("Autor: ");
+        Console.ForegroundColor = livro.Quantidade <= 0 ? ConsoleColor.DarkGray : ConsoleColor.DarkGreen;
+        Console.WriteLine(livro.Autor);
+
+        Console.ForegroundColor = livro.Quantidade <= 0 ? ConsoleColor.DarkGray : ConsoleColor.White;
+        Console.Write("Gênero: ");
+        Console.ForegroundColor = livro.Quantidade <= 0 ? ConsoleColor.DarkGray : ConsoleColor.DarkGreen;
+        Console.WriteLine(livro.Genero);
+
+        Console.ForegroundColor = livro.Quantidade <= 0 ? ConsoleColor.DarkGray : ConsoleColor.White;
+        Console.Write("Quantidade: ");
+        Console.ForegroundColor = livro.Quantidade <= 0 ? ConsoleColor.Red : ConsoleColor.DarkGreen;
+        Console.WriteLine(livro.Quantidade <= 0 ? "Indisponível" : livro.Quantidade.ToString());
+
         Console.ResetColor();
-        Console.WriteLine("\nPressione qualquer tecla para voltar...");
-        Console.ReadKey();
     }
+
+    Console.WriteLine("\nPressione qualquer tecla para voltar...");
+    Console.ReadKey();
+}
+
 
     static void DevolverLivros(string nomeUsuario, Dictionary<string, List<Livro>> livrosEmprestados, List<Livro> catalogoLivros)
     {
