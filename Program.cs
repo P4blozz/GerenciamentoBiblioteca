@@ -7,6 +7,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.Clear();
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("Digite seu nome: ");
         Console.ResetColor();
@@ -109,7 +110,7 @@ class Program
         {
             Console.Clear();
             ExibirCabecalho("Gerenciar Usuário");
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("------------------------------------------");
             Console.WriteLine("| O que você deseja:                     |");
             Console.WriteLine("------------------------------------------");
@@ -159,11 +160,15 @@ class Program
         {
             Console.Clear();
             ExibirCabecalho("Gerenciar Administrador");
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("| O que você deseja como Administrador:  |");
+            Console.WriteLine("------------------------------------------");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("O que você deseja como Administrador:");
-            Console.WriteLine("1. Cadastrar livro.");
-            Console.WriteLine("2. Consultar catálogo.");
-            Console.WriteLine("3. Voltar.");
+            Console.WriteLine("| 1. Cadastrar livro.                    |");
+            Console.WriteLine("| 2. Consultar catálogo.                 |");
+            Console.WriteLine("| 3. Voltar.                             |");
+            Console.WriteLine("------------------------------------------");
             Console.ResetColor();
             Console.Write("Escolha uma opção: ");
             
@@ -221,8 +226,25 @@ class Program
         ExibirCabecalho("Catálogo de Livros");
         foreach (var livro in catalogoLivros)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{livro.Titulo} - {livro.Autor} ({livro.Genero}) - Quantidade disponível: {livro.Quantidade}");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write("\nNome: ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(livro.Titulo);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write("Autor: ");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine(livro.Autor);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write("Gênero: ");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine(livro.Genero);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write("Quantidade: ");
+        Console.ForegroundColor = ConsoleColor.DarkGreen; 
+        Console.WriteLine(livro.Quantidade);
+        Console.ResetColor();
+
+
         }
         Console.ResetColor();
         Console.WriteLine("\nPressione qualquer tecla para voltar...");
