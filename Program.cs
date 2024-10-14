@@ -7,7 +7,9 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("Digite seu nome: ");
+        Console.ResetColor();
         string nomePessoa = Console.ReadLine();
 
         bool sair = false;
@@ -17,38 +19,34 @@ class Program
         while (!sair)
         {
             Console.Clear();
-            Console.WriteLine("==========================================");
-            Console.WriteLine("Bem Vindo à Biblioteca, " + nomePessoa + "! ");
-            Console.WriteLine("==========================================");
-            Console.WriteLine("1. Usuário.");
-            Console.WriteLine("2. Administrador.");
-            Console.WriteLine("3. Sair.");
-            int opcaoUser;
+            ExibirCabecalho("Bem Vindo à Biblioteca");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Usuário: {nomePessoa}\n");
+            Console.ResetColor();
+            ExibirMenuPrincipal();
 
-            if (int.TryParse(Console.ReadLine(), out opcaoUser))
+            if (int.TryParse(Console.ReadLine(), out int opcaoUser))
             {
                 switch (opcaoUser)
                 {
                     case 1:
                         GerenciarUsuario(nomePessoa, catalogoLivros, livrosEmprestados);
                         break;
-
                     case 2:
                         GerenciarAdmin(catalogoLivros);
                         break;
-
                     case 3:
                         sair = true;
+                        ExibirMensagem("Saindo... Obrigado por usar a biblioteca!");
                         break;
-
                     default:
-                        Console.WriteLine("Opção inválida.");
+                        ExibirMensagem("Opção inválida!");
                         break;
                 }
             }
             else
             {
-                Console.WriteLine("Entrada inválida.");
+                ExibirMensagem("Entrada inválida! Digite um número válido.");
             }
         }
     }
@@ -70,6 +68,39 @@ class Program
         };
     }
 
+    static void ExibirCabecalho(string titulo)
+    {
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.BackgroundColor = ConsoleColor.DarkBlue;
+        Console.WriteLine("==========================================");
+        Console.WriteLine("|         BEM VINDO A BIBLIOTECA!        |");
+        Console.WriteLine("==========================================\n");
+        Console.ResetColor();
+    }
+
+    static void ExibirMenuPrincipal()
+    {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("------------------------------------------");
+        Console.WriteLine("| 1. Usuário.                            |");
+        Console.WriteLine("| 2. Administrador.                      |");
+        Console.WriteLine("| 3. Sair.                               |");
+        Console.WriteLine("------------------------------------------");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write("Escolha uma opção: ");
+        Console.ResetColor();
+    }
+
+    static void ExibirMensagem(string mensagem)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"\n{mensagem}");
+        Console.ForegroundColor = ConsoleColor.Gray;
+        Console.WriteLine("\nPressione qualquer tecla para continuar...");
+        Console.ResetColor();
+        Console.ReadKey();
+    }
+
     static void GerenciarUsuario(string nomeUsuario, List<Livro> catalogoLivros, Dictionary<string, List<Livro>> livrosEmprestados)
     {
         bool sairUsuario = false;
@@ -77,35 +108,45 @@ class Program
         while (!sairUsuario)
         {
             Console.Clear();
-            Console.WriteLine("O que você deseja:");
-            Console.WriteLine("1. Consultar catálogo.");
-            Console.WriteLine("2. Devolver livros.");
-            Console.WriteLine("3. Pegar livro.");
-            Console.WriteLine("4. Voltar.");
+            ExibirCabecalho("Gerenciar Usuário");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("| O que você deseja:                     |");
+            Console.WriteLine("------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("| 1. Consultar catálogo.                 |");
+            Console.WriteLine("| 2. Devolver livros.                    |");
+            Console.WriteLine("| 3. Pegar livro.                        |");
+            Console.WriteLine("| 4. Voltar.                             |");
+            Console.WriteLine("------------------------------------------");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Escolha uma opção: ");
-            int opcao = int.Parse(Console.ReadLine());
-
-            switch (opcao)
+            
+            if (int.TryParse(Console.ReadLine(), out int opcao))
             {
-                case 1:
-                    ExibirCatalogo(catalogoLivros);
-                    break;
-
-                case 2:
-                    DevolverLivros(nomeUsuario, livrosEmprestados, catalogoLivros);
-                    break;
-
-                case 3:
-                    PegarLivrosEmprestados(nomeUsuario, catalogoLivros, livrosEmprestados);
-                    break;
-
-                case 4:
-                    sairUsuario = true;
-                    break;
-
-                default:
-                    Console.WriteLine("Opção inválida.");
-                    break;
+                switch (opcao)
+                {
+                    case 1:
+                        ExibirCatalogo(catalogoLivros);
+                        break;
+                    case 2:
+                        DevolverLivros(nomeUsuario, livrosEmprestados, catalogoLivros);
+                        break;
+                    case 3:
+                        PegarLivrosEmprestados(nomeUsuario, catalogoLivros, livrosEmprestados);
+                        break;
+                    case 4:
+                        sairUsuario = true;
+                        break;
+                    default:
+                        ExibirMensagem("Opção inválida.");
+                        break;
+                }
+            }
+            else
+            {
+                ExibirMensagem("Entrada inválida! Digite um número válido.");
             }
         }
     }
@@ -117,36 +158,44 @@ class Program
         while (!sairAdmin)
         {
             Console.Clear();
+            ExibirCabecalho("Gerenciar Administrador");
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("O que você deseja como Administrador:");
             Console.WriteLine("1. Cadastrar livro.");
             Console.WriteLine("2. Consultar catálogo.");
             Console.WriteLine("3. Voltar.");
+            Console.ResetColor();
             Console.Write("Escolha uma opção: ");
-            int opcaoAdmin = int.Parse(Console.ReadLine());
-
-            switch (opcaoAdmin)
+            
+            if (int.TryParse(Console.ReadLine(), out int opcaoAdmin))
             {
-                case 1:
-                    CadastrarLivro(catalogoLivros);
-                    break;
-
-                case 2:
-                    ExibirCatalogo(catalogoLivros);
-                    break;
-
-                case 3:
-                    sairAdmin = true;
-                    break;
-
-                default:
-                    Console.WriteLine("Opção inválida.");
-                    break;
+                switch (opcaoAdmin)
+                {
+                    case 1:
+                        CadastrarLivro(catalogoLivros);
+                        break;
+                    case 2:
+                        ExibirCatalogo(catalogoLivros);
+                        break;
+                    case 3:
+                        sairAdmin = true;
+                        break;
+                    default:
+                        ExibirMensagem("Opção inválida.");
+                        break;
+                }
+            }
+            else
+            {
+                ExibirMensagem("Entrada inválida! Digite um número válido.");
             }
         }
     }
 
     static void CadastrarLivro(List<Livro> catalogoLivros)
     {
+        Console.Clear();
+        ExibirCabecalho("Cadastrar Livro");
         Console.Write("Digite o título do livro: ");
         string titulo = Console.ReadLine();
         Console.Write("Digite o autor do livro: ");
@@ -154,23 +203,29 @@ class Program
         Console.Write("Digite o gênero do livro: ");
         string genero = Console.ReadLine();
         Console.Write("Digite a quantidade disponível do livro: ");
-        int quantidade = int.Parse(Console.ReadLine());
-
-        catalogoLivros.Add(new Livro(titulo, autor, genero, quantidade));
-        Console.WriteLine("Livro cadastrado com sucesso!");
-        Console.WriteLine("Pressione qualquer tecla para voltar...");
-        Console.ReadKey();
+        
+        if (int.TryParse(Console.ReadLine(), out int quantidade))
+        {
+            catalogoLivros.Add(new Livro(titulo, autor, genero, quantidade));
+            ExibirMensagem("Livro cadastrado com sucesso!");
+        }
+        else
+        {
+            ExibirMensagem("Quantidade inválida. Livro não cadastrado.");
+        }
     }
 
     static void ExibirCatalogo(List<Livro> catalogoLivros)
     {
         Console.Clear();
-        Console.WriteLine("Catálogo de Livros:");
+        ExibirCabecalho("Catálogo de Livros");
         foreach (var livro in catalogoLivros)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{livro.Titulo} - {livro.Autor} ({livro.Genero}) - Quantidade disponível: {livro.Quantidade}");
         }
-        Console.WriteLine("Pressione qualquer tecla para voltar...");
+        Console.ResetColor();
+        Console.WriteLine("\nPressione qualquer tecla para voltar...");
         Console.ReadKey();
     }
 
@@ -178,127 +233,61 @@ class Program
     {
         if (!livrosEmprestados.ContainsKey(nomeUsuario) || livrosEmprestados[nomeUsuario].Count == 0)
         {
-            Console.WriteLine("Você não tem livros emprestados.");
-            Console.WriteLine("Pressione qualquer tecla para voltar...");
-            Console.ReadKey();
+            ExibirMensagem("Você não tem livros emprestados.");
             return;
         }
 
+        Console.Clear();
+        ExibirCabecalho("Devolver Livros");
         Console.WriteLine("Livros emprestados:");
         for (int i = 0; i < livrosEmprestados[nomeUsuario].Count; i++)
         {
             Console.WriteLine($"{i + 1}. {livrosEmprestados[nomeUsuario][i].Titulo}");
         }
-        Console.WriteLine($"{livrosEmprestados[nomeUsuario].Count + 1}. Devolver todos os livros");
+        Console.WriteLine($"{livrosEmprestados[nomeUsuario].Count + 1}. Cancelar");
+        Console.Write("Escolha um número para devolver o livro: ");
 
-        Console.Write("Escolha um livro para devolver (ou o número para devolver todos): ");
-        int escolha = int.Parse(Console.ReadLine());
-
-        if (escolha == livrosEmprestados[nomeUsuario].Count + 1)
+        if (int.TryParse(Console.ReadLine(), out int indice) && indice >= 1 && indice <= livrosEmprestados[nomeUsuario].Count)
         {
-            var livrosParaDevolver = new List<Livro>(livrosEmprestados[nomeUsuario]);
-            foreach (var livro in livrosParaDevolver)
-            {
-                catalogoLivros.Add(livro);
-            }
-            livrosEmprestados[nomeUsuario].Clear();
-            Console.WriteLine("Todos os livros foram devolvidos com sucesso!");
-        }
-        else if (escolha > 0 && escolha <= livrosEmprestados[nomeUsuario].Count)
-        {
-            var livroParaDevolver = livrosEmprestados[nomeUsuario][escolha - 1];
-            livrosEmprestados[nomeUsuario].Remove(livroParaDevolver);
-            catalogoLivros.Add(livroParaDevolver);
-            Console.WriteLine("Livro devolvido com sucesso!");
+            Livro livro = livrosEmprestados[nomeUsuario][indice - 1];
+            livro.Quantidade++;
+            livrosEmprestados[nomeUsuario].RemoveAt(indice - 1);
+            ExibirMensagem("Livro devolvido com sucesso!");
         }
         else
         {
-            Console.WriteLine("Opção inválida.");
+            ExibirMensagem("Operação cancelada.");
         }
-
-        Console.WriteLine("Pressione qualquer tecla para voltar...");
-        Console.ReadKey();
     }
 
     static void PegarLivrosEmprestados(string nomeUsuario, List<Livro> catalogoLivros, Dictionary<string, List<Livro>> livrosEmprestados)
     {
-        if (!livrosEmprestados.ContainsKey(nomeUsuario))
+        Console.Clear();
+        ExibirCabecalho("Emprestar Livros");
+        ExibirCatalogo(catalogoLivros);
+        Console.Write("\nEscolha o número do livro para pegar emprestado: ");
+        
+        if (int.TryParse(Console.ReadLine(), out int escolha) && escolha >= 1 && escolha <= catalogoLivros.Count)
         {
-            livrosEmprestados[nomeUsuario] = new List<Livro>();
-        }
-
-        if (livrosEmprestados[nomeUsuario].Count >= 3)
-        {
-            Console.WriteLine("Você já possui 3 livros emprestados. Devolva algum livro antes de pegar mais.");
-            Console.WriteLine("Pressione qualquer tecla para voltar...");
-            Console.ReadKey();
-            return;
-        }
-
-        List<Livro> livrosEscolhidos = new List<Livro>();
-        int contador = 0;
-
-        while (contador < 3)
-        {
-            Console.Clear();
-            Console.WriteLine("Escolha um livro para pegar emprestado (ou digite 0 para finalizar):");
-            var livrosDisponiveisParaEmprestimo = catalogoLivros.Where(l => l.Quantidade > 0 && !livrosEmprestados.Values.Any(e => e.Contains(l))).ToList();
-            for (int i = 0; i < livrosDisponiveisParaEmprestimo.Count; i++)
+            Livro livroSelecionado = catalogoLivros[escolha - 1];
+            if (livroSelecionado.Quantidade > 0)
             {
-                Console.WriteLine($"{i + 1}. {livrosDisponiveisParaEmprestimo[i].Titulo} - {livrosDisponiveisParaEmprestimo[i].Autor} (Disponível: {livrosDisponiveisParaEmprestimo[i].Quantidade})");
-            }
-
-            Console.Write("Escolha uma opção: ");
-            int escolha = int.Parse(Console.ReadLine());
-
-            if (escolha == 0)
-            {
-                break;
-            }
-
-            if (escolha > 0 && escolha <= livrosDisponiveisParaEmprestimo.Count)
-            {
-                var livroSelecionado = livrosDisponiveisParaEmprestimo[escolha - 1];
-                livrosEscolhidos.Add(livroSelecionado);
                 livroSelecionado.Quantidade--;
-                contador++;
-                Console.WriteLine($"Você escolheu: {livroSelecionado.Titulo}");
+                if (!livrosEmprestados.ContainsKey(nomeUsuario))
+                {
+                    livrosEmprestados[nomeUsuario] = new List<Livro>();
+                }
+                livrosEmprestados[nomeUsuario].Add(livroSelecionado);
+                ExibirMensagem("Livro emprestado com sucesso!");
             }
             else
             {
-                Console.WriteLine("Opção inválida.");
+                ExibirMensagem("Não há exemplares disponíveis para empréstimo.");
             }
         }
-
-        if (livrosEscolhidos.Count > 0)
+        else
         {
-            livrosEmprestados[nomeUsuario].AddRange(livrosEscolhidos);
-            SalvarLivrosEmprestados(nomeUsuario, livrosEscolhidos);
-            Console.WriteLine("Livros emprestados com sucesso!");
-            Console.WriteLine("Você pegou os seguintes livros:");
-
-            foreach (var livro in livrosEscolhidos)
-            {
-                Console.WriteLine($"- {livro.Titulo}");
-            }
-        }
-
-        Console.WriteLine("Pressione qualquer tecla para voltar...");
-        Console.ReadKey();
-    }
-
-    static void SalvarLivrosEmprestados(string nomeUsuario, List<Livro> livros)
-    {
-        string caminhoArquivo = $"{nomeUsuario}_livros_emprestados.txt";
-        using (StreamWriter sw = new StreamWriter(caminhoArquivo, true))
-        {
-            sw.WriteLine($"Usuário: {nomeUsuario}");
-            sw.WriteLine("Livros emprestados:");
-            foreach (var livro in livros)
-            {
-                sw.WriteLine($"- {livro.Titulo} - {livro.Autor}");
-            }
-            sw.WriteLine();
+            ExibirMensagem("Opção inválida.");
         }
     }
 }

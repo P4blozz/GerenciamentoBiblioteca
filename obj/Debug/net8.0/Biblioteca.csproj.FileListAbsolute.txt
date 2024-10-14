@@ -12,3 +12,18 @@ C:\Users\Alunos\Documents\Nova pasta\Biblioteca\obj\Debug\net8.0\refint\Bibliote
 C:\Users\Alunos\Documents\Nova pasta\Biblioteca\obj\Debug\net8.0\Biblioteca.pdb
 C:\Users\Alunos\Documents\Nova pasta\Biblioteca\obj\Debug\net8.0\Biblioteca.genruntimeconfig.cache
 C:\Users\Alunos\Documents\Nova pasta\Biblioteca\obj\Debug\net8.0\ref\Biblioteca.dll
+D:\Pablo\GerenciamentoBiblioteca\bin\Debug\net8.0\Biblioteca.exe
+D:\Pablo\GerenciamentoBiblioteca\bin\Debug\net8.0\Biblioteca.deps.json
+D:\Pablo\GerenciamentoBiblioteca\bin\Debug\net8.0\Biblioteca.runtimeconfig.json
+D:\Pablo\GerenciamentoBiblioteca\bin\Debug\net8.0\Biblioteca.dll
+D:\Pablo\GerenciamentoBiblioteca\bin\Debug\net8.0\Biblioteca.pdb
+D:\Pablo\GerenciamentoBiblioteca\obj\Debug\net8.0\Biblioteca.GeneratedMSBuildEditorConfig.editorconfig
+D:\Pablo\GerenciamentoBiblioteca\obj\Debug\net8.0\Biblioteca.AssemblyInfoInputs.cache
+D:\Pablo\GerenciamentoBiblioteca\obj\Debug\net8.0\Biblioteca.AssemblyInfo.cs
+D:\Pablo\GerenciamentoBiblioteca\obj\Debug\net8.0\Biblioteca.csproj.CoreCompileInputs.cache
+D:\Pablo\GerenciamentoBiblioteca\obj\Debug\net8.0\Biblioteca.sourcelink.json
+D:\Pablo\GerenciamentoBiblioteca\obj\Debug\net8.0\Biblioteca.dll
+D:\Pablo\GerenciamentoBiblioteca\obj\Debug\net8.0\refint\Biblioteca.dll
+D:\Pablo\GerenciamentoBiblioteca\obj\Debug\net8.0\Biblioteca.pdb
+D:\Pablo\GerenciamentoBiblioteca\obj\Debug\net8.0\Biblioteca.genruntimeconfig.cache
+D:\Pablo\GerenciamentoBiblioteca\obj\Debug\net8.0\ref\Biblioteca.dll
